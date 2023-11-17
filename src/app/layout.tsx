@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Fira_Code, Roboto_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react';
 
 const firaCode = Fira_Code({ weight: '600', subsets: ['greek'], variable: '--font-primary' })
 const robotoMono = Roboto_Mono({
@@ -21,7 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${firaCode.variable} ${robotoMono.variable} bg-[#10132B] text-neutral-50 `}>{children}</body>
+      <body className={`${firaCode.variable} ${robotoMono.variable} bg-[#10132B] text-neutral-50 `}>{children}
+        <Analytics />
+      </body>
     </html>
   )
 }
