@@ -1,4 +1,4 @@
-import { StartButton } from "../../StartButton";
+import { StartButton } from "../StartButton";
 
 export function Introduction() {
     return <div className="flex flex-col items-center justify-center gap-12 w-full">
