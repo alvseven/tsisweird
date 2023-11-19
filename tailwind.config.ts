@@ -11,7 +11,17 @@ const config: Config = {
       fontFamily: {
         "inknut-antiqua": "var(--font-primary)",
         "roboto-mono": "var(--font-secondary)"
-      }
+      },
+      keyframes: {
+        blink: {
+          '0%': { opacity: "0" },
+          '50%': { opacity: "0.6" },
+          '100%': { opacity: "0" },
+        },
+      },
+      animation: {
+        blink: 'blink 1.5s infinite', // Ajuste a duração conforme necessário
+      },
     },
   },
   plugins: [],

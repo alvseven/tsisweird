@@ -3,12 +3,13 @@ import Grid from '../../public/grid.png'
 import Image from "next/image";
 import { Introduction } from "./components/Introduction";
 import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main className='flex w-full relative min-h-screen antialiased overflow-hidden bg-[#10132b]'>
+      <main className='flex items-center justify-center w-full relative min-h-screen antialiased overflow-hidden bg-[#10132b]'>
         <Image
           src={Beam}
           alt=""
@@ -23,6 +24,7 @@ export default function Home() {
         />
         <Introduction />
       </main>
+      <Footer />
     </>
   )
 }
