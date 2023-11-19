@@ -9,10 +9,10 @@ export function Question() {
         </div>
         <div className="grid grid-cols-2 gap-4">
             <button className="rounded-2xl text-slate-100 truncate font-inter border-2 border-dotted border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
-                Same as User
+                Error: {"Type 'namee' does not satisfy the constraint 'name'"}
             </button>
             <button className="rounded-2xl text-slate-100 truncate font-inter border-2 border-dotted border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
-                Error: {"Type 'namee' does not satisfy the constraint 'name'"}
+                Same as User
             </button>
             <button className="rounded-2xl text-slate-100 truncate font-inter border-2 border-dotted border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
                 {"{}"}
