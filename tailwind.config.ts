@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        "inknut-antiqua": "var(--font-primary)",
+        "inter": "var(--font-primary)",
         "roboto-mono": "var(--font-secondary)"
       },
       keyframes: {
