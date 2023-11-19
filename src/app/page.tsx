@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <>
-      <Header isPlaying={isPlaying} />
+      <Header />
       <main className='flex items-center justify-center w-full relative min-h-screen antialiased overflow-hidden bg-[#10132b]'>
         <Image
           src={Beam}
