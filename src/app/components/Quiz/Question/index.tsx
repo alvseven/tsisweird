@@ -5,7 +5,7 @@ export function Question() {
     return <section className="flex flex-col drop-shadow-lg shadow-lg shadow-blue-950 pb-6 px-12">
         <div className="flex flex-col items-center justify-center">
             <h2 className="font-inter text-xl text-center">What is the output of <span className="font-roboto-mono text-[#1AD6B5]">UserWithoutName?</span></h2>
-            <Image src={Question1} alt="first question" />
+            <Image src={Question1} alt="first question" priority={true} />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <button className="rounded-2xl text-slate-100 truncate font-inter border-2 border-dotted border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
