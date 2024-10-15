@@ -1,22 +1,23 @@
-'use client'
+"use client";
 
-import Beam from '../../public/beam.png'
-import Grid from '../../public/grid.png'
 import Image from "next/image";
-import { Introduction } from "./components/Introduction";
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import { useState } from 'react';
-import { Quiz } from './components/Quiz';
+import { useState } from "react";
+
+import Beam from "../../public/beam.png";
+import Grid from "../../public/grid.png";
+
+import { Introduction } from "./components/introduction";
+import { Header } from "./components/header";
+import { Footer } from "./components/footer";
+import { Quiz } from "./components/quiz";
 
 export default function Home() {
-
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
     <>
       <Header />
-      <main className='flex items-center justify-center w-full relative min-h-screen antialiased overflow-hidden bg-[#10132b]'>
+      <main className="flex items-center justify-center w-full relative min-h-screen antialiased overflow-hidden bg-[#10132b]">
         <Image
           src={Beam}
           alt=""
@@ -33,5 +34,5 @@ export default function Home() {
       </main>
       <Footer />
     </>
-  )
+  );
 }
