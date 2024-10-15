@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="flex items-center justify-center w-full relative min-h-screen antialiased overflow-hidden bg-[#10132b]">
+      <main className="flex items-center justify-center w-full min-h-screen antialiased overflow-hidden bg-[#10132b]">
         <Image
           src={Beam}
           alt=""
