@@ -14,16 +14,16 @@ export function Question() {
         <Image src={Question1} alt="first question" priority={true} />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <button className="rounded-2xl text-slate-100 truncate font-inter border-2 border-dotted border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
+        <button className="rounded-2xl text-slate-100 truncate font-inter border-2  border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
           Error: {"Type 'namee' does not satisfy the constraint 'name'"}
         </button>
-        <button className="rounded-2xl text-slate-100 truncate font-inter border-2 border-dotted border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
+        <button className="rounded-2xl text-slate-100 truncate font-inter border-2  border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
           {"{ name: string; age: number; }"}
         </button>
-        <button className="rounded-2xl text-slate-100 truncate font-inter border-2 border-dotted border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
+        <button className="rounded-2xl text-slate-100 truncate font-inter border-2  border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
           {"{}"}
         </button>
-        <button className="rounded-2xl text-slate-100 truncate font-inter border-2 border-dotted border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
+        <button className="rounded-2xl text-slate-100 truncate font-inter border-2  border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid">
           {"{ age: number; }"}
         </button>
       </div>
