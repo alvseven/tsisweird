@@ -8,7 +8,7 @@ type IntroductionProps = {
 
 export function Introduction({ setIsPlaying }: IntroductionProps) {
   return (
-    <div className="flex flex-col items-center justify-center gap-12 w-full relative">
+    <div className="flex flex-col items-center justify-center gap-12 w-full relative z-50">
       <h1 className="text-[1.6rem] sm:text-3xl font-inter text-center relative tracking-wider">
         Typescript is weird
       </h1>

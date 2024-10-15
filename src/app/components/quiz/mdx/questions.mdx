@@ -1,0 +1,49 @@
+```typescript
+// What will TypeScript do if you write the code above?
+
+interface Logger {
+  log(param: string | number): void
+};
+
+function greeting(name: string) {
+  console.log(`Hey, ${name.toLowerCase()}, how are you doing?`)
+}
+
+const user: Logger = {
+  log: greeting
+}
+
+user.log(7)
+
+// Option 1: TypeScript will raise an error saying that 'number' is not assignable to 'string'.
+
+// Option 2: TypeScript will raise an error saying that 'Logger' expects a method, but you are passing a function.
+
+// Option 3: TypeScript won't raise any errors.
+
+// Option 4: TypeScript will raise an error saying that the 'greeting' function is not assignable to 'log' because 
+//           of its parameters.
+
+
+// What's the output of UserWithoutBirthdate? (you can assume that "exactOptionalPropertyTypes"
+   option in tsconfig is set to true)
+ 
+type User = {
+  name?: string
+  readonly age: number
+  birthdate: Date
+}
+
+type StrictOmit<T, K extends keyof T> = { [Key in Exclude<keyof T, K>]: T[Key] }
+
+type UserWithoutBirthdate = StrictOmit<User, 'birthdate'>
+
+// Option 1: { name: string | undefined; age: number; }
+
+// Option 2: { name?: string | undefined; readonly age: number; }
+
+// Option 3: { name?: string; readonly age: number; }
+
+// Option 4: { name: string; age: number; }
+
+```
