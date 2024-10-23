@@ -14,7 +14,7 @@ export function Question({ title, code, options, current }: QuestionProps) {
         <h2 className="font-inter md:text-xl text-center">{title}</h2>
         {code}
       </div>
-      <div className="flex flex-col justify-center gap-4">
+      <div className="flex flex-col justify-end gap-4">
         {options.map((option) => (
           <button
             key={option}
