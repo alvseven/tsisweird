@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 type QuestionProps = {
   title: string;
   code: ReactNode;
-  options: [string, string, string, string];
+  options: readonly [string, string, string, string];
   current: number;
 };
 
