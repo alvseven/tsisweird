@@ -1,18 +1,28 @@
 import Link from "next/link";
+import { GithubIcon } from "./icons/github";
 
 export function Footer() {
   return (
     <footer className="items-center justify-center w-full flex flex-col gap-1 pb-6 mt-4 2xl:mt-0 px-px">
-      <p className="text-center font-roboto-mono text-sm opacity-80">
-        [WIP] Made with 💙 by&nbsp;
+      <div className="flex items-center gap-2">
+        <p className="text-center font-roboto-mono text-sm opacity-80">
+          [WIP] Made with 💙 by&nbsp;
+          <Link
+            href="https://bento.me/alves"
+            target="_blank"
+            className="text-blue-700 brightness-150"
+          >
+            Alves
+          </Link>
+        </p>
         <Link
-          href="https://bento.me/alves"
+          href="https://github.com/alvseven/tsisweird"
           target="_blank"
-          className="text-blue-700 brightness-150"
+          className="z-50"
         >
-          Alves
+          <GithubIcon />
         </Link>
-      </p>
+      </div>
       <p className="text-center font-roboto-mono text-sm opacity-80">
         This site was inspired in&nbsp;
         <Link
