@@ -11,7 +11,9 @@ export function Question({ title, code, options, current }: QuestionProps) {
   return (
     <>
       <div className="flex flex-col gap-8 px-2">
-        <h2 className="font-inter md:text-xl text-center">{title}</h2>
+        <h2 className="font-inter text-slate-100 md:text-xl text-center">
+          Question: {title}
+        </h2>
         {code}
       </div>
       <div className="flex flex-col justify-end gap-4">

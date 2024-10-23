@@ -9,9 +9,9 @@ export default function Home() {
         code={<QuestionOne />}
         options={
           [
+            "TypeScript won't raise any errors.",
             "TypeScript will raise an error saying that 'number' is not assignable to 'string'.",
             "TypeScript will raise an error saying that 'Logger' expects a method, but you are passing a function.",
-            "TypeScript won't raise any errors.",
             "TypeScript will raise an error saying that the 'greeting' function is not assignable to 'log' because of its parameters.",
           ] as const
         }

@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="flex items-center justify-center w-full ">
-      <h3 className="text-center font-roboto-mono text-sm opacity-80">
+    <footer className="items-center justify-center w-full flex flex-col gap-1 pb-6">
+      <p className="text-center font-roboto-mono text-sm opacity-80">
         [WIP] Made with 💙 by&nbsp;
         <Link
           href="https://bento.me/alves"
@@ -12,7 +12,18 @@ export function Footer() {
         >
           Alves
         </Link>
-      </h3>
+      </p>
+      <p className="text-center font-roboto-mono text-sm opacity-80">
+        This site was inspired in&nbsp;
+        <Link
+          href="https://jsisweird.com"
+          target="_blank"
+          className="text-orange-600 brightness-150"
+        >
+          jsisweird
+        </Link>
+        &nbsp;{":)"}
+      </p>
     </footer>
   );
 }
