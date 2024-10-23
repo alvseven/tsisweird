@@ -10,8 +10,8 @@ type QuestionProps = {
 export function Question({ title, code, options, current }: QuestionProps) {
   return (
     <>
-      <div className="flex flex-col gap-8 px-2">
-        <h2 className="font-inter text-slate-100 md:text-xl text-center">
+      <div className="flex flex-col gap-4 px-2">
+        <h2 className="font-inter text-sm font-bold text-pretty text-slate-100 md:text-base lg:text-xl text-center">
           Question: {title}
         </h2>
         {code}
