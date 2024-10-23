@@ -3,7 +3,7 @@ import QuestionOne from "./(components)/mdx/questions.mdx";
 
 export default function Home() {
   return (
-    <section className="flex flex-col xl:flex-row gap-8 py-6 px-1 lg:px-12 max-w-full z-50 drop-shadow-lg shadow-lg shadow-blue-950">
+    <section className="flex flex-col xl:flex-row gap-8 pt-6 pb-12 px-1 lg:px-12 max-w-full z-50 drop-shadow-lg shadow-lg shadow-blue-950">
       <Question
         title="What will TypeScript do if you write the code above?"
         code={<QuestionOne />}
