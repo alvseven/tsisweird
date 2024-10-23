@@ -1,38 +1,25 @@
-"use client";
+import Link from "next/link";
 
-import Image from "next/image";
-import { useState } from "react";
-
-import Beam from "../../public/beam.png";
-import Grid from "../../public/grid.png";
-
-import { Introduction } from "./components/introduction";
-import { Header } from "./components/header";
-import { Footer } from "./components/footer";
-import { Quiz } from "./components/quiz";
+import { TypescriptIcon } from "./(components)/icons/typescript";
 
 export default function Home() {
-  const [isPlaying, setIsPlaying] = useState(false);
-
   return (
-    <>
-      <Header />
-      <main className="flex items-center justify-center w-full min-h-screen antialiased overflow-hidden bg-[#10132b]">
-        <Image
-          src={Beam}
-          alt=""
-          className="absolute opacity-70 top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2"
-          width="1308"
-        />
-        <Image
-          src={Grid}
-          alt=""
-          className="absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2"
-          width="1308"
-        />
-        {isPlaying ? <Quiz /> : <Introduction setIsPlaying={setIsPlaying} />}
-      </main>
-      <Footer />
-    </>
+    <div className="flex flex-col items-center justify-center gap-8 lg:gap-12 w-full relative z-50 sm:px-4 px-2">
+      <h1 className="text-2xl md:text-3xl lg:text-4xl font-inter text-center relative tracking-wider">
+        Typescript is weird
+      </h1>
+      <p className="text-xs sm:text-sm px-4 sm:pr-0 sm:pl-4 sm:w-2/3 lg:w-2/4 xl:w-1/3 font-roboto-mono">
+        Navigate through this TypeScript quiz, facing unique challenges with
+        unexpected twists, exploring nuances that may surprise even seasoned
+        TypeScript developers.
+      </p>
+      <Link
+        href="/quiz"
+        className="flex gap-4 align-center mt-4 justify-center md:text-xl px-12 md:px-16 py-4 rounded-full border border-double border-indigo-900 to-[#111827] text-neutral-100 font-roboto-mono hover:border-gray-400"
+      >
+        Get started
+        <TypescriptIcon />
+      </Link>
+    </div>
   );
 }

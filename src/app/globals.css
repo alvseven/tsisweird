@@ -2,3 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+pre {
+  overflow-x: auto;
+  padding: 1rem 0;
+  font-size: 1.125rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+  }
+}
+
+pre {
+  background: rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); */
+  border-radius: 8px;
+}
+
+pre [data-line] {
+  padding: 0rem 1rem 0 1rem;
+}
+
+code {
+  counter-reset: line;
+}
+
+code > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+
+  display: inline-block;
+  width: 1rem;
+  padding-right: 1.5rem;
+  text-align: right;
+  color: gray;
+}
+
+code[data-line-numbers-max-digits="2"] > [data-line]::before {
+  width: 1.5rem;
+}
+
+code[data-line-numbers-max-digits="3"] > [data-line]::before {
+  width: 1.5rem;
+}
