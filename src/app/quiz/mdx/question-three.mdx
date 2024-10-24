@@ -1,0 +1,7 @@
+```typescript
+type Literal = 'a' | 'b' | 'c'; 
+
+type Narrow<T> = T extends 'a' ? number : string;
+
+type Result = Narrow<Literal>;
+```

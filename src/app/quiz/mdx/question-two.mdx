@@ -1,0 +1,11 @@
+```typescript
+ type User = {
+   name?: string
+   readonly age: number
+   birthdate: Date
+ }
+
+ type StrictOmit<T, K extends keyof T> = { [Key in Exclude<keyof T, K>]: T[Key] }
+
+ type UserWithoutBirthdate = StrictOmit<User, 'birthdate'>
+```

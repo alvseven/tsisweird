@@ -1,0 +1,9 @@
+```typescript
+type ExcludeNever<T> = T extends never ? false : true;
+
+type First = ExcludeNever<never>;
+
+type Second = ExcludeNever<string | never>;
+
+type Result = [First, Second];
+```

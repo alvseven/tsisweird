@@ -1,0 +1,13 @@
+```typescript
+ function assertIsString(value: unknown): asserts value is string {
+   if (typeof value !== 'number') {
+     throw new Error('Value is not a string');
+   }
+ }
+
+ const user = 7
+
+ assertIsString(user);
+
+ console.log(`Hello, ${user.toLowerCase()}!`);
+```

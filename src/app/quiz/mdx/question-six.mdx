@@ -1,0 +1,11 @@
+```typescript
+ function isString(value: unknown): value is string {
+   return typeof value === 'number';
+ }
+
+ const user = 7
+
+ if (isString(user)) {
+   console.log(`Hello, ${user.toLowerCase()}!`)
+ }
+```
