@@ -1,46 +1,49 @@
 "use client";
 
 import { type ReactNode, createContext, useContext, useState } from "react";
+
 import { questions } from "../data/questions";
 
 type GameStatus = {
+  quizHasEnded: boolean;
   currentQuestion: number;
-  total: number;
   corrects: number[];
+  readonly total: number;
 };
 
+type RegisterAttemptInput = { attempt: number; correct: number };
+
+type RegisterAttempt = ({ attempt, correct }: RegisterAttemptInput) => void;
+
 type GameContext = {
-  registerAttempt: ({
-    attempt,
-    correct,
-  }: {
-    attempt: number;
-    correct: number;
-  }) => void;
   gameStatus: GameStatus;
+  registerAttempt: RegisterAttempt;
 };
 
 const GameContext = createContext<GameContext | null>(null);
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [gameStatus, setGameStatus] = useState<GameStatus>({
+    quizHasEnded: false,
     currentQuestion: 0,
-    total: questions.length,
     corrects: [],
+    total: questions.length,
   });
 
-  const registerAttempt: GameContext["registerAttempt"] = ({
-    attempt,
-    correct,
-  }) => {
-    setGameStatus((prev) => {
+  const registerAttempt: RegisterAttempt = ({ attempt, correct }) => {
+    setGameStatus((previousState) => {
       const isCorrectAnswer = attempt === correct;
+
+      const isLastQuestion =
+        previousState.currentQuestion + 1 === previousState.total;
+
       return {
-        ...prev,
-        currentQuestion: prev.currentQuestion + 1,
+        ...previousState,
+        quizHasEnded: isLastQuestion,
+        currentQuestion: previousState.currentQuestion + 1,
         corrects: isCorrectAnswer
-          ? [...prev.corrects, prev.currentQuestion]
-          : prev.corrects,
+          ? [...previousState.corrects, previousState.currentQuestion]
+          : previousState.corrects,
       };
     });
   };

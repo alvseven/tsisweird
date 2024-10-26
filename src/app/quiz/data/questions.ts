@@ -21,7 +21,7 @@ export const questions = [
   },
   {
     title:
-      "What is the output of UserWithoutBirthdate? (assume that 'exactOptionalPropertyTypes' option in tsconfig is set to true)",
+      "What is the output of `UserWithoutBirthdate`? (assume that 'exactOptionalPropertyTypes' option in tsconfig is set to true)",
     code: QuestionTwoCode,
     options: [
       "{ name: string | undefined; age: number; }",
@@ -60,10 +60,10 @@ export const questions = [
       "What will TypeScript do in the following scenario with a faulty type guard?",
     code: QuestionSixCode,
     options: [
-      "TypeScript will raise an error because `typeof value === 'number'` contradicts the return type of the type guard",
-      "TypeScript will compile without errors and the inferred type of user inside the if statement will be 'string'",
-      "TypeScript will compile without errors and the inferred type of user inside the if statement will be 'number'",
-      "TypeScript will raise an error because `value is string` contradicts `typeof value === 'number'`",
+      "TypeScript will raise an error because `typeof value === 'number'` contradicts the predicate `value is string`",
+      "TypeScript will compile without errors and the inferred type of user inside the if statement will be `string`",
+      "TypeScript will compile without errors and the inferred type of user inside the if statement will be `number`",
+      "TypeScript will raise an error because the predicate `value is string` contradicts `typeof value === 'number'`",
     ],
     correct: 1,
   },
@@ -73,11 +73,11 @@ export const questions = [
     code: QuestionSevenCode,
     options: [
       "TypeScript will raise an error because `typeof value !== 'number''` contradicts the assertion 'asserts value is string'",
-      "TypeScript will compile without errors and the inferred type of user after the function call will be string",
-      "TypeScript will raise an error because after the function call user type is never, so it's not possible to use toLowerCase()",
+      "TypeScript will compile without errors and the inferred type of `user` after the function call will be string",
+      "TypeScript will raise an error because after the function call `user` type is `never`, so it's not possible to use `toLowerCase()`",
       "TypeScript will raise an error because `asserts value is string` contradicts `typeof value !== 'number'`",
     ],
-    correct: 0,
+    correct: 2,
   },
   {
     title: "What will TypeScript infer for the type of `UserWithoutName`?",

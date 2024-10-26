@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { GithubIcon } from "./icons/github";
 
 export function Footer() {

@@ -9,11 +9,19 @@ import { questions } from "./data/questions";
 export default function Home() {
   const { gameStatus } = useGame();
 
+  if (gameStatus.quizHasEnded) {
+    return (
+      <div>
+        <p>Correct answers: {gameStatus.corrects.length}</p>
+      </div>
+    );
+  }
+
   const currentQuestion = questions[gameStatus.currentQuestion];
-  const QuestionCode = questions[gameStatus.currentQuestion].code;
+  const QuestionCode = currentQuestion?.code;
 
   return (
-    <section className="flex flex-col xl:flex-row gap-8 pt-6 pb-12 px-1 lg:px-12 max-w-full z-50 drop-shadow-lg shadow-lg shadow-blue-950">
+    <section className="flex flex-col xl:flex-row gap-8 pt-6 pb-12 px-1 lg:px-12 max-w-full z-50 drop-shadow-lg shadow-lg shadow-blue-950 min-w-[100%] min-h-[424px]">
       <Question
         title={currentQuestion.title}
         code={<QuestionCode />}

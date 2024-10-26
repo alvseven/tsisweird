@@ -1,13 +1,22 @@
 "use client";
 
 import type { ReactNode } from "react";
+
 import { useGame } from "../contexts/game";
+
+type ExtractIndexes<T extends PropertyKey> =
+  T extends `${infer Index extends number}` ? Index : never;
 
 type QuestionProps = {
   title: string;
   code: ReactNode;
   options: readonly [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
+  correct: ExtractIndexes<keyof QuestionProps["options"]>;
+  /*
+    The 'correct' property could be manually defined as 0 | 1 | 2 | 3, but doing so would break the contract between 'correct' and 'options'.
+    If we change the length of 'options', the valid values for 'correct' wouldn't automatically update.
+    By using the 'ExtractIndexes' type, we ensure that 'correct' always matches the valid indices of 'options', maintaining consistency and type safety. Plus, it's pretty cool 😎
+  */
 };
 
 export function Question({ title, code, options, correct }: QuestionProps) {
@@ -19,7 +28,7 @@ export function Question({ title, code, options, correct }: QuestionProps) {
   return (
     <>
       <div className="flex flex-col gap-4 px-2 min-w-[70%]">
-        <h2 className="font-inter text-sm font-bold text-pretty text-slate-100 md:text-base lg:text-xl text-center">
+        <h2 className="font-inter text-sm font-bold text-pretty text-slate-100 md:text-base lg:text-xl mx-2 text-center">
           {title}
         </h2>
         {code}
