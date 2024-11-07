@@ -11,9 +11,12 @@ type GameStatus = {
   readonly total: number;
 };
 
-type RegisterAttemptInput = { attempt: number; correct: number };
+type RegisterAttemptInput = { attempt: number; correctAnswer: number };
 
-type RegisterAttempt = ({ attempt, correct }: RegisterAttemptInput) => void;
+type RegisterAttempt = ({
+  attempt,
+  correctAnswer,
+}: RegisterAttemptInput) => void;
 
 type GameContext = {
   gameStatus: GameStatus;
@@ -30,9 +33,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
     total: questions.length,
   });
 
-  const registerAttempt: RegisterAttempt = ({ attempt, correct }) => {
+  const registerAttempt: RegisterAttempt = ({ attempt, correctAnswer }) => {
     setGameStatus((previousState) => {
-      const isCorrectAnswer = attempt === correct;
+      const isCorrectAnswer = attempt === correctAnswer;
 
       const isLastQuestion =
         previousState.currentQuestion + 1 === previousState.total;

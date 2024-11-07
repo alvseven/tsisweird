@@ -18,6 +18,7 @@ export const questions = [
       "TypeScript will raise an error saying that the 'greeting' function is not assignable to 'log' because of its parameters",
     ],
     correct: 0,
+    explanation: "",
   },
   {
     title:
@@ -30,18 +31,21 @@ export const questions = [
       "{ name: string; age: number; }",
     ],
     correct: 3,
+    explanation: "",
   },
   {
     title: "What will TypeScript infer for the type of `Result`?",
     code: QuestionThreeCode,
     options: ["number", "string", "number | string", "never"],
     correct: 2,
+    explanation: "",
   },
   {
     title: "What does TypeScript infer as the return type of this function?",
     code: QuestionFourCode,
     options: ["string", "number", "any", "unknown"],
     correct: 1,
+    explanation: "",
   },
   {
     title:
@@ -54,6 +58,7 @@ export const questions = [
       "[never, true]",
     ],
     correct: 3,
+    explanation: "",
   },
   {
     title:
@@ -66,6 +71,7 @@ export const questions = [
       "TypeScript will raise an error because the predicate `value is string` contradicts `typeof value === 'number'`",
     ],
     correct: 1,
+    explanation: "",
   },
   {
     title:
@@ -78,6 +84,7 @@ export const questions = [
       "TypeScript will raise an error because `asserts value is string` contradicts `typeof value !== 'number'`",
     ],
     correct: 2,
+    explanation: "",
   },
   {
     title: "What will TypeScript infer for the type of `UserWithoutName`?",
@@ -89,5 +96,6 @@ export const questions = [
       "TypeScript will raise an error saying that the 'greeting' function is not assignable to 'log' because of its parameters.",
     ],
     correct: 0,
+    explanation: "",
   },
 ] as const;

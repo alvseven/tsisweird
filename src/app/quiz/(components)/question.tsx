@@ -11,15 +11,21 @@ type QuestionProps = {
   title: string;
   code: ReactNode;
   options: readonly [string, string, string, string];
-  correct: ExtractIndexes<keyof QuestionProps["options"]>;
+  explanation: string;
   /*
-    The 'correct' property could be manually defined as 0 | 1 | 2 | 3, but doing so would break the contract between 'correct' and 'options'.
-    If we change the length of 'options', the valid values for 'correct' wouldn't automatically update.
-    By using the 'ExtractIndexes' type, we ensure that 'correct' always matches the valid indices of 'options', maintaining consistency and type safety. Plus, it's pretty cool 😎
+    The 'correctAnswer' property could be manually defined as 0 | 1 | 2 | 3, but doing so would break the contract between 'correctAnswer' and 'options'.
+    If we change the length of 'options', the valid values for 'correctAnswer' wouldn't automatically update.
+    By using the 'ExtractIndexes' type, we ensure that 'correctAnswer' always matches the valid indexes of 'options', maintaining consistency and type safety. Plus, it's pretty cool 😎
   */
+  correctAnswer: ExtractIndexes<keyof QuestionProps["options"]>;
 };
 
-export function Question({ title, code, options, correct }: QuestionProps) {
+export function Question({
+  title,
+  code,
+  options,
+  correctAnswer,
+}: QuestionProps) {
   const { gameStatus, registerAttempt } = useGame();
 
   const currentQuestion = gameStatus.currentQuestion + 1;
@@ -31,14 +37,14 @@ export function Question({ title, code, options, correct }: QuestionProps) {
         <h2 className="font-inter text-sm font-bold text-pretty text-slate-100 md:text-base lg:text-xl mx-2 text-center">
           {title}
         </h2>
-        {code}
+        <div className="[&>figure>pre]:min-h-[400px]">{code}</div>
       </div>
       <div className="flex flex-col justify-end gap-4 min-w-[30%]">
         {options.map((option, index) => (
           <button
             key={option}
-            className="rounded-2xl text-slate-100 font-inter border-2 border-blue-800 p-4 text-xs hover:border-blue-800 hover:border-solid"
-            onClick={() => registerAttempt({ attempt: index, correct })}
+            className="rounded-2xl text-slate-100 font-inter border-2 border-blue-800 p-4 text-xs "
+            onClick={() => registerAttempt({ attempt: index, correctAnswer })}
           >
             {option}
           </button>

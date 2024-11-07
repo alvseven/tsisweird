@@ -46,12 +46,12 @@ export default function RootLayout({
             <Image
               src={Beam}
               alt="beam"
-              className="absolute opacity-70 top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 w-full h-full overflow-hidden"
+              className="absolute opacity-70 top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 w-full h-full overflow-hidden -z-50"
             />
             <Image
               src={Grid}
               alt="grid"
-              className="absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 w-full h-full overflow-hidden"
+              className="absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 w-full h-full overflow-hidden -z-50"
             />
           </div>
           {children}

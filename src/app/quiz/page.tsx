@@ -1,5 +1,6 @@
 "use client";
 
+import EndGame from "./(components)/end-game";
 import { Question } from "./(components)/question";
 
 import { useGame } from "./contexts/game";
@@ -10,11 +11,7 @@ export default function Home() {
   const { gameStatus } = useGame();
 
   if (gameStatus.quizHasEnded) {
-    return (
-      <div>
-        <p>Correct answers: {gameStatus.corrects.length}</p>
-      </div>
-    );
+    return <EndGame />;
   }
 
   const currentQuestion = questions[gameStatus.currentQuestion];
@@ -26,7 +23,8 @@ export default function Home() {
         title={currentQuestion.title}
         code={<QuestionCode />}
         options={currentQuestion.options}
-        correct={currentQuestion.correct}
+        correctAnswer={currentQuestion.correct}
+        explanation={currentQuestion.explanation}
       />
     </section>
   );
