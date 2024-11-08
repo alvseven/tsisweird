@@ -36,7 +36,7 @@ export default function EndGame() {
   const shareQuizResults = () => {};
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen  text-neutral-50 px-4 py-8">
+    <div className="flex flex-col items-center justify-center w-full min-h-screen  text-neutral-50 px-4 py-8 z-50">
       <div className="w-full lg:w-4/5">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-inter text-center tracking-wider mb-8">
           Congratulations for completing the quiz! Here are the results:
