@@ -86,16 +86,16 @@ export const questions = [
     correct: 2,
     explanation: "",
   },
-  {
-    title: "What will TypeScript infer for the type of `UserWithoutName`?",
-    code: QuestionEightCode,
-    options: [
-      "TypeScript won't raise any errors.",
-      "TypeScript will raise an error saying that 'number' is not assignable to 'string'.",
-      "TypeScript will raise an error saying that 'Logger' expects a method, but you are passing a function.",
-      "TypeScript will raise an error saying that the 'greeting' function is not assignable to 'log' because of its parameters.",
-    ],
-    correct: 0,
-    explanation: "",
-  },
+  // {
+  //   title: "What will TypeScript infer for the type of `UserWithoutName`?",
+  //   code: QuestionEightCode,
+  //   options: [
+  //     "TypeScript won't raise any errors.",
+  //     "TypeScript will raise an error saying that 'number' is not assignable to 'string'.",
+  //     "TypeScript will raise an error saying that 'Logger' expects a method, but you are passing a function.",
+  //     "TypeScript will raise an error saying that the 'greeting' function is not assignable to 'log' because of its parameters.",
+  //   ],
+  //   correct: 0,
+  //   explanation: "",
+  // },
 ] as const;

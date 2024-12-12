@@ -7,7 +7,7 @@ import { questions } from "../data/questions";
 type GameStatus = {
   quizHasEnded: boolean;
   currentQuestion: number;
-  corrects: number[];
+  answers: number[];
   readonly total: number;
 };
 
@@ -29,14 +29,12 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [gameStatus, setGameStatus] = useState<GameStatus>({
     quizHasEnded: false,
     currentQuestion: 0,
-    corrects: [],
+    answers: [],
     total: questions.length,
   });
 
   const registerAttempt: RegisterAttempt = ({ attempt, correctAnswer }) => {
     setGameStatus((previousState) => {
-      const isCorrectAnswer = attempt === correctAnswer;
-
       const isLastQuestion =
         previousState.currentQuestion + 1 === previousState.total;
 
@@ -44,9 +42,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
         ...previousState,
         quizHasEnded: isLastQuestion,
         currentQuestion: previousState.currentQuestion + 1,
-        corrects: isCorrectAnswer
-          ? [...previousState.corrects, previousState.currentQuestion]
-          : previousState.corrects,
+        answers: [...previousState.answers, attempt],
       };
     });
   };

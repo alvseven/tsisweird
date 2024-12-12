@@ -34,7 +34,7 @@ export function Question({
   return (
     <>
       <div className="flex flex-col gap-4 px-2 min-w-[70%]">
-        <h2 className="font-inter text-sm font-bold text-pretty text-slate-100 md:text-base lg:text-xl mx-2 text-center">
+        <h2 className="font-inter text-sm font-bold text-pretty text-slate-100 md:text-base lg:text-xl mx-2">
           {title}
         </h2>
         <div className="[&>figure>pre]:min-h-[400px]">{code}</div>
@@ -43,7 +43,7 @@ export function Question({
         {options.map((option, index) => (
           <button
             key={option}
-            className="rounded-2xl text-slate-100 font-inter border-2 border-blue-800 p-4 text-xs "
+            className="rounded-2xl text-slate-100 font-inter border-2 border-blue-800 p-4 text-xs text-left"
             onClick={() => registerAttempt({ attempt: index, correctAnswer })}
           >
             {option}

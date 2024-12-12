@@ -21,7 +21,10 @@ export default function EndGame() {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentExplanation, setCurrentExplanation] = useState("");
 
-  const correctCount = gameStatus.corrects.length;
+  const correctsAnswers = questions.filter(
+    (question, index) => question.correct === gameStatus.answers[index]
+  );
+  const correctCount = correctsAnswers.length;
   const incorrectCount = gameStatus.total - correctCount;
 
   const openExplanation = (explanation: string) => {
@@ -38,7 +41,7 @@ export default function EndGame() {
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen  text-neutral-50 px-4 py-8 z-50">
       <div className="w-full lg:w-4/5">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-inter text-center tracking-wider mb-8">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-inter tracking-wider mb-8">
           Congratulations for completing the quiz! Here are the results:
         </h1>
         <div className="bg-[#1a1f3d] rounded-lg p-4 sm:p-6 w-full mb-8">
@@ -58,14 +61,12 @@ export default function EndGame() {
           </div>
           <div className="space-y-8">
             {questions.map((question, index) => {
-              const isCorrect = gameStatus.corrects.includes(index);
-              const userAnswer = isCorrect
-                ? question.correct
-                : gameStatus.corrects.includes(index + 1)
-                ? 0
-                : gameStatus.corrects.includes(index - 1)
-                ? question.options.length - 1
-                : null;
+              const userAnswer = gameStatus.answers[index];
+              const correctOption = question.correct;
+              const isCorrectAnswer = userAnswer === correctOption;
+
+              const QuestionCode = question.code;
+
               return (
                 <div
                   key={index}
@@ -75,30 +76,32 @@ export default function EndGame() {
                     {question.title}
                   </h2>
 
-                  <question.code />
+                  <QuestionCode />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
-                    {question.options.map((option, optionIndex) => {
-                      const isCorrectAnswer = optionIndex === question.correct;
-                      const isUserAnswer = optionIndex === userAnswer;
+                    {question.options.map((option, index) => {
+                      const isUserAnswer = index === userAnswer;
+
+                      const isCorrectOption = question.correct === index;
+
                       return (
                         <div
-                          key={optionIndex}
-                          className={`relative rounded-lg text-slate-100 font-inter p-4 text-xs sm:text-sm transition-all duration-300
+                          key={index}
+                          className={`relative rounded-lg text-slate-100 font-inter p-4 text-xs sm:text-sm transition-all duration-300 flex items-center
                             ${
-                              isCorrectAnswer
-                                ? "bg-green-500/20 border-2 border-green-500"
-                                : isUserAnswer && !isCorrect
-                                ? "bg-red-500/20 border-2 border-red-500"
-                                : "border-blue-800 border-2"
+                              isCorrectOption
+                                ? "bg-green-500/20 border-2 border-green-500/30"
+                                : isUserAnswer && !isCorrectAnswer
+                                ? "bg-red-500/20 border-2 border-red-500/30"
+                                : "border-2 border-blue-800/30"
                             }`}
                         >
                           <div className="pr-6">{option}</div>
-                          <div className="absolute top-2 right-2">
-                            {isCorrectAnswer && (
-                              <CheckCircle className="w-5 h-5 text-green-400" />
+                          <div className="absolute top-1/3 right-3">
+                            {isCorrectOption && (
+                              <CheckCircle className="w-5 h-5 text-green-400 my-auto" />
                             )}
-                            {isUserAnswer && !isCorrect && (
+                            {!isCorrectAnswer && isUserAnswer && (
                               <XCircle className="w-5 h-5 text-red-400" />
                             )}
                           </div>
