@@ -8,7 +8,7 @@ export default function Home() {
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-inter text-center relative tracking-wider">
         Typescript is weird
       </h1>
-      <p className="text-xs sm:text-sm px-4 sm:pr-0 sm:pl-4 sm:w-2/3 lg:w-2/4 xl:w-1/3 font-roboto-mono">
+      <p className="text-xs sm:text-sm px-4 sm:pr-0 sm:pl-4 sm:w-2/3 lg:w-2/4 xl:w-1/3 font-roboto-mono text-center">
         Navigate through this TypeScript quiz, facing unique challenges with
         unexpected twists, exploring nuances that may surprise even seasoned
         TypeScript developers.

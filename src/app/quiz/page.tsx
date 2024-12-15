@@ -23,8 +23,7 @@ export default function Home() {
         title={currentQuestion.title}
         code={<QuestionCode />}
         options={currentQuestion.options}
-        correctAnswer={currentQuestion.correct}
-        explanation={currentQuestion.explanation}
+        correctAnswer={currentQuestion.correctAnswer}
       />
     </section>
   );

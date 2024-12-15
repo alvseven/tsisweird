@@ -1,0 +1,5 @@
+```typescript
+type IsJavaGood<T extends boolean> = T extends false ? 'Definitely not' : 'You must be kidding';
+
+type Result = IsJavaGood<false>
+```

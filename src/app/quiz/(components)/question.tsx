@@ -1,23 +1,14 @@
 "use client";
 
 import type { ReactNode } from "react";
-
 import { useGame } from "../contexts/game";
+import { questions } from "../data/questions";
 
-type ExtractIndexes<T extends PropertyKey> =
-  T extends `${infer Index extends number}` ? Index : never;
-
-type QuestionProps = {
-  title: string;
+type QuestionProps = Omit<
+  (typeof questions)[number],
+  "explanation" | "code"
+> & {
   code: ReactNode;
-  options: readonly [string, string, string, string];
-  explanation: string;
-  /*
-    The 'correctAnswer' property could be manually defined as 0 | 1 | 2 | 3, but doing so would break the contract between 'correctAnswer' and 'options'.
-    If we change the length of 'options', the valid values for 'correctAnswer' wouldn't automatically update.
-    By using the 'ExtractIndexes' type, we ensure that 'correctAnswer' always matches the valid indexes of 'options', maintaining consistency and type safety. Plus, it's pretty cool 😎
-  */
-  correctAnswer: ExtractIndexes<keyof QuestionProps["options"]>;
 };
 
 export function Question({
