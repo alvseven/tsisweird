@@ -36,7 +36,7 @@ export function ExplanationModal({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
-            className="bg-[#1a1f3d] rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
+            className="bg-[#1a1f3d] rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] overflow-hidden"
             onClick={(event) => event.stopPropagation()}
             tabIndex={-1}
             role="dialog"
