@@ -1,6 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
+import { CheckCircle, XCircle } from "lucide-react";
 import { useGame } from "../contexts/game";
 import { questions } from "../data/questions";
 
@@ -18,9 +19,28 @@ export function Question({
   correctAnswer,
 }: QuestionProps) {
   const { gameStatus, registerAttempt } = useGame();
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [showFeedback, setShowFeedback] = useState(false);
 
   const currentQuestion = gameStatus.currentQuestion + 1;
   const totalQuestions = gameStatus.total;
+
+  useEffect(() => {
+    if (showFeedback) {
+      const timer = setTimeout(() => {
+        setShowFeedback(false);
+        setSelectedAnswer(null);
+      }, 1000); // Delay before moving to the next question
+
+      return () => clearTimeout(timer);
+    }
+  }, [showFeedback]);
+
+  const handleAttempt = (attempt: number) => {
+    setSelectedAnswer(attempt);
+    setShowFeedback(true);
+    registerAttempt({ attempt, correctAnswer });
+  };
 
   return (
     <>
@@ -34,10 +54,30 @@ export function Question({
         {options.map((option, index) => (
           <button
             key={option}
-            className="rounded-2xl text-slate-100 font-inter border-2 border-blue-800 p-4 text-xs text-left"
-            onClick={() => registerAttempt({ attempt: index, correctAnswer })}
+            className={`rounded-2xl text-slate-100 font-inter border-2 p-4 text-xs text-left relative
+              ${
+                showFeedback && index === correctAnswer
+                  ? "bg-green-500/20 border-green-500/30"
+                  : showFeedback &&
+                    index === selectedAnswer &&
+                    index !== correctAnswer
+                  ? "bg-red-500/20 border-red-500/30"
+                  : "border-blue-800 hover:bg-[#252A44]"
+              }`}
+            onClick={() => handleAttempt(index)}
+            disabled={showFeedback}
           >
             {option}
+            {showFeedback && (
+              <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
+                {index === correctAnswer && (
+                  <CheckCircle className="w-5 h-5 z-50 text-green-400" />
+                )}
+                {index === selectedAnswer && index !== correctAnswer && (
+                  <XCircle className="w-5 h-5 z-50 text-red-400" />
+                )}
+              </div>
+            )}
           </button>
         ))}
         <div className="flex items-center justify-center mt-8 mb-2 ">

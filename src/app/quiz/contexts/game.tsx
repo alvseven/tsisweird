@@ -1,7 +1,12 @@
 "use client";
 
-import { type ReactNode, createContext, useContext, useState } from "react";
-
+import {
+  type ReactNode,
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+} from "react";
 import { questions } from "../data/questions";
 
 type GameStatus = {
@@ -9,6 +14,7 @@ type GameStatus = {
   currentQuestion: number;
   answers: number[];
   readonly total: number;
+  showFeedback: boolean;
 };
 
 type RegisterAttemptInput = { attempt: number; correctAnswer: number };
@@ -31,21 +37,32 @@ export function GameProvider({ children }: { children: ReactNode }) {
     currentQuestion: 0,
     answers: [],
     total: questions.length,
+    showFeedback: false,
   });
 
-  const registerAttempt: RegisterAttempt = ({ attempt, correctAnswer }) => {
-    setGameStatus((previousState) => {
-      const isLastQuestion =
-        previousState.currentQuestion + 1 === previousState.total;
+  const registerAttempt: RegisterAttempt = useCallback(({ attempt }) => {
+    setGameStatus((previousState) => ({
+      ...previousState,
+      answers: [...previousState.answers, attempt],
+      showFeedback: true,
+    }));
 
-      return {
-        ...previousState,
-        quizHasEnded: isLastQuestion,
-        currentQuestion: previousState.currentQuestion + 1,
-        answers: [...previousState.answers, attempt],
-      };
-    });
-  };
+    setTimeout(() => {
+      setGameStatus((previousState) => {
+        const isLastQuestion =
+          previousState.currentQuestion + 1 === previousState.total;
+
+        return {
+          ...previousState,
+          quizHasEnded: isLastQuestion,
+          currentQuestion: isLastQuestion
+            ? previousState.currentQuestion
+            : previousState.currentQuestion + 1,
+          showFeedback: false,
+        };
+      });
+    }, 1000); // 1 second delay, matching the feedback duration in the Question component
+  }, []);
 
   return (
     <GameContext.Provider value={{ gameStatus, registerAttempt }}>
