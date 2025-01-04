@@ -70,7 +70,7 @@ export function ExplanationModal({
                   />
                 }
               </div>
-              <div className="flex gap-4">
+              <div className="flex flex-col gap-4">
                 <h4>Explanation: </h4>
                 <p className="text-sm text-slate-300 leading-relaxed mb-4">
                   {question.explanation}
@@ -80,7 +80,7 @@ export function ExplanationModal({
                 href={playgroundLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors bg-indigo-900 hover:bg-indigo-800 px-4 py-2 rounded"
+                className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors border border-indigo-700 hover:bg-indigo-800 px-4 py-2 rounded"
               >
                 Open in TypeScript Playground
                 <ExternalLink size={16} />
