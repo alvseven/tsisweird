@@ -18,8 +18,8 @@ export function ExplanationModal({
 }: ExplanationModalProps) {
   const QuestionCode = question.code;
 
-  const playgroundLink = `https://www.typescriptlang.org/play?#code/${compressToEncodedURIComponent(`
-  type User = { name: string; age: number; anotherProp: 'hey' }`)}`;
+  // const playgroundLink = `https://www.typescriptlang.org/play?#code/${compressToEncodedURIComponent(`
+  // type User = { name: string; age: number; anotherProp: 'hey' }`)}`;
 
   return (
     <AnimatePresence>
@@ -45,20 +45,18 @@ export function ExplanationModal({
           >
             <div className="flex justify-between items-center border-b border-indigo-900 p-4">
               <h3 id="modal-title" className="text-xl font-bold text-slate-100">
-                Explanation
+                Question
               </h3>
               <button
                 onClick={onClose}
                 className="text-slate-400 hover:text-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full p-2 bg-indigo-900 hover:bg-indigo-800"
                 aria-label="Close modal"
               >
-                <X size={20} />
+                <X size={16} />
               </button>
             </div>
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-180px)] custom-scrollbar">
-              <h4 className="text-lg font-semibold mb-3 text-indigo-300">
-                {question.title}
-              </h4>
+              <h4 className="text-lg font-semibold mb-3">{question.title}</h4>
               <div className="bg-[#10132B] p-4 rounded mb-4 overflow-x-auto custom-scrollbar">
                 {
                   <QuestionCode
@@ -70,29 +68,23 @@ export function ExplanationModal({
                   />
                 }
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 pl-6 px-4">
                 <h4>Explanation: </h4>
                 <p className="text-sm text-slate-300 leading-relaxed mb-4">
                   {question.explanation}
                 </p>
               </div>
               <a
-                href={playgroundLink}
+                href={
+                  "https://www.typescriptlang.org/play/?#code/C4TwDgpgBAkgzgKQIYDckHED2mAmAeAFSggA9gIA7HOKAI2wBsIkKA+KAXiiNPKpoBmSBnAgAoKJKgB+KACIAIhAEBLCivIMQUCpmByJUgFzyAmpgCuUALYW4wOtADWKnDjUBzOQG4xY0JBQAEoQcBYMDlzwyGhYuHhCIhCsvkA"
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors border border-indigo-700 hover:bg-indigo-800 px-4 py-2 rounded"
               >
-                Open in TypeScript Playground
+                Open in typescript playground
                 <ExternalLink size={16} />
               </a>
-            </div>
-            <div className="border-t border-indigo-900 p-4 flex justify-end">
-              <button
-                onClick={onClose}
-                className="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-[#1a1f3d] font-medium text-sm"
-              >
-                Close
-              </button>
             </div>
           </motion.div>
         </motion.div>
