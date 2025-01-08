@@ -48,10 +48,12 @@ export default function EndGame() {
 
   const generatePDF = () => {
     console.log("Generating PDF...");
+    alert("TODO :D");
   };
 
   const shareQuizResults = () => {
     console.log("Sharing quiz results...");
+    alert("TODO :D");
   };
 
   return (
