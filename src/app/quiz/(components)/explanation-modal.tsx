@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import { questions } from "../data/questions";
 import { compressToEncodedURIComponent } from "lz-string";
+import Link from "next/link";
 
 export type ExplanationModalProps = {
   explanationModalIsOpen: boolean;
@@ -17,9 +18,6 @@ export function ExplanationModal({
   question,
 }: ExplanationModalProps) {
   const QuestionCode = question.code;
-
-  // const playgroundLink = `https://www.typescriptlang.org/play?#code/${compressToEncodedURIComponent(`
-  // type User = { name: string; age: number; anotherProp: 'hey' }`)}`;
 
   return (
     <AnimatePresence>
@@ -43,21 +41,26 @@ export function ExplanationModal({
             aria-modal="true"
             aria-labelledby="modal-title"
           >
-            <div className="flex justify-between items-center border-b border-indigo-900 p-4">
-              <h3 id="modal-title" className="text-xl font-bold text-slate-100">
-                Question
-              </h3>
+            <div className="flex justify-between items-center border-b border-indigo-900 p-6">
+              <div>
+                <h3
+                  id="modal-title"
+                  className="text-2xl font-bold text-slate-100 mb-2"
+                >
+                  Question
+                </h3>
+                <p className="text-slate-400 text-sm">{question.title}</p>
+              </div>
               <button
                 onClick={onClose}
-                className="text-slate-400 hover:text-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full p-2 bg-indigo-900 hover:bg-indigo-800"
+                className="text-slate-400 hover:text-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full p-2.5  hover:bg-indigo-800 border border-indigo-700"
                 aria-label="Close modal"
               >
                 <X size={16} />
               </button>
             </div>
-            <div className="p-6 overflow-y-auto max-h-[calc(90vh-180px)] custom-scrollbar">
-              <h4 className="text-lg font-semibold mb-3">{question.title}</h4>
-              <div className="bg-[#10132B] p-4 rounded mb-4 overflow-x-auto custom-scrollbar">
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-180px)] custom-scrollbar space-y-6">
+              <div className="bg-[#10132B] p-6 rounded-lg border border-indigo-900/30">
                 {
                   <QuestionCode
                     components={{
@@ -68,23 +71,27 @@ export function ExplanationModal({
                   />
                 }
               </div>
-              <div className="flex flex-col gap-4 pl-6 px-4">
-                <h4>Explanation: </h4>
-                <p className="text-sm text-slate-300 leading-relaxed mb-4">
+              <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-slate-100">
+                  Explanation
+                </h4>
+                <p className="text-sm text-slate-300 leading-relaxed">
                   {question.explanation}
                 </p>
               </div>
-              <a
-                href={
-                  "https://www.typescriptlang.org/play/?#code/C4TwDgpgBAkgzgKQIYDckHED2mAmAeAFSggA9gIA7HOKAI2wBsIkKA+KAXiiNPKpoBmSBnAgAoKJKgB+KACIAIhAEBLCivIMQUCpmByJUgFzyAmpgCuUALYW4wOtADWKnDjUBzOQG4xY0JBQAEoQcBYMDlzwyGhYuHhCIhCsvkA"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors border border-indigo-700 hover:bg-indigo-800 px-4 py-2 rounded"
-              >
-                Open in typescript playground
-                <ExternalLink size={16} />
-              </a>
+              <div className="flex justify-end pt-4">
+                <Link
+                  href={
+                    "https://www.typescriptlang.org/play/?#code/C4TwDgpgBAkgzgKQIYDckHED2mAmAeAFSggA9gIA7HOKAI2wBsIkKA+KAXiiNPKpoBmSBnAgAoKJKgB+KACIAIhAEBLCivIMQUCpmByJUgFzyAmpgCuUALYW4wOtADWKnDjUBzOQG4xY0JBQAEoQcBYMDlzwyGhYuHhCIhCsvkA"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-indigo-400 font-medium text-sm hover:underline-offset-2 hover:underline"
+                >
+                  Open in TypeScript Playground
+                  <ExternalLink size={16} className="ml-1" />
+                </Link>
+              </div>
             </div>
           </motion.div>
         </motion.div>
