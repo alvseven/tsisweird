@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "motion/react";
 
 import Confetti from "react-confetti";
 import {
@@ -56,6 +57,21 @@ export default function EndGame() {
     alert("TODO :D");
   };
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
     <>
       <Confetti
@@ -66,35 +82,54 @@ export default function EndGame() {
         style={{ zIndex: 9999 }}
         recycle={false}
       />
-      <div className="flex flex-col items-center justify-center w-full min-h-screen text-neutral-50 px-4 py-8 z-50">
-        <div className="w-full lg:w-4/5">
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-inter tracking-wider mb-8">
+      <motion.div 
+        initial="hidden"
+        animate="show"
+        variants={container}
+        className="flex flex-col items-center justify-center w-full min-h-screen text-neutral-50 px-4 py-8 z-50"
+      >
+        <motion.div variants={item} className="w-full lg:w-4/5">
+          <motion.h1 
+            variants={item}
+            className="text-xl sm:text-2xl md:text-3xl font-inter tracking-wider mb-8"
+          >
             Congratulations on completing the quiz! Here are your results:
-          </h1>
-          <div className="bg-[#1a1f3d] rounded-lg p-4 sm:p-6 w-full mb-8">
+          </motion.h1>
+          <motion.div 
+            variants={item}
+            className="bg-[#1a1f3d] rounded-lg p-4 sm:p-6 w-full mb-8"
+          >
             <div className="flex justify-between items-center mb-6 text-base sm:text-lg md:text-xl">
-              <p className="flex items-center gap-2 text-xs md:text-xl lg:text-2xl">
+              <motion.p 
+                variants={item}
+                className="flex items-center gap-2 text-xs md:text-xl lg:text-2xl"
+              >
                 <XCircle className="text-red-400 w-5 h-5 lg:w-7 lg:h-7" />
                 <span className="font-roboto-mono text-red-400">
                   Incorrect: {incorrectCount}
                 </span>
-              </p>
-              <p className="flex items-center gap-2 text-xs md:text-xl lg:text-2xl">
+              </motion.p>
+              <motion.p 
+                variants={item}
+                className="flex items-center gap-2 text-xs md:text-xl lg:text-2xl"
+              >
                 <CheckCircle className="text-green-400 w-5 h-5 lg:w-7 lg:h-7" />
                 <span className="font-roboto-mono text-green-400">
                   Correct: {correctCount}
                 </span>
-              </p>
+              </motion.p>
             </div>
-            <div className="space-y-8">
+            <motion.div variants={item} className="space-y-8">
               {questions.map((question, index) => {
                 const userAnswer = gameStatus.answers[index];
                 const correctOption = question.correctAnswer;
                 const isCorrectAnswer = userAnswer === correctOption;
 
                 return (
-                  <div
+                  <motion.div
                     key={index}
+                    variants={item}
+                    whileHover={{ scale: 1.01 }}
                     className="border border-indigo-900 rounded-lg p-4 transition-all duration-300 hover:border-indigo-600"
                   >
                     <h2 className="font-inter text-sm sm:text-base md:text-lg lg:text-xl font-bold text-slate-100 mb-4">
@@ -143,28 +178,35 @@ export default function EndGame() {
                         See question explanation
                       </button>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
+            </motion.div>
+          </motion.div>
+          <motion.div 
+            variants={item}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="flex gap-4 items-center justify-center text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full border border-double border-indigo-900 text-neutral-100 font-roboto-mono hover:border-gray-400 transition-all duration-300 w-full sm:w-auto"
               onClick={shareQuizResults}
             >
               Share results
               <Share />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={generatePDF}
               className="flex gap-4 items-center justify-center text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full border border-double border-indigo-900 text-neutral-100 font-roboto-mono hover:border-gray-400 transition-all duration-300 w-full sm:w-auto"
             >
               Download PDF
               <Download className="w-5 h-5 sm:w-6 sm:h-6" />
-            </button>
-          </div>
-        </div>
+            </motion.button>
+          </motion.div>
+        </motion.div>
         {explanationModalIsOpen && currentQuestion && (
           <ExplanationModal
             question={currentQuestion}
@@ -172,7 +214,7 @@ export default function EndGame() {
             onClose={closeExplanationModal}
           />
         )}
-      </div>
+      </motion.div>
     </>
   );
 }
