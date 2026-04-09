@@ -62,11 +62,11 @@ export function ExplanationModal({
               <div>
                 <h3
                   id="modal-title"
-                  className="text-2xl font-bold text-slate-100 mb-2"
+                  className="text-2xl font-bold text-slate-100 mb-2 font-sans"
                 >
                   Question
                 </h3>
-                <p className="text-slate-400 text-sm">{question.title}</p>
+                <p className="text-slate-400 text-sm font-sans">{question.title}</p>
               </div>
               <button
                 onClick={onClose}
@@ -89,10 +89,10 @@ export function ExplanationModal({
                 }
               </div>
               <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-slate-100">
+                <h4 className="text-lg font-semibold text-slate-100 font-sans">
                   Explanation
                 </h4>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-300 leading-relaxed font-sans">
                   {question.explanation}
                 </p>
               </div>
@@ -102,7 +102,7 @@ export function ExplanationModal({
                     href={`https://www.typescriptlang.org/play/?#code/${compressToEncodedURIComponent(question.playgroundCode)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-indigo-400 font-medium text-sm hover:underline-offset-2 hover:underline"
+                    className="inline-flex items-center gap-2 text-indigo-400 font-medium text-sm hover:underline-offset-2 hover:underline font-sans"
                   >
                     Open in TypeScript Playground
                     <ExternalLink size={16} className="ml-1" />
