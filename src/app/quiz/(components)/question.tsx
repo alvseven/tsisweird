@@ -8,7 +8,7 @@ import { questions } from "../data/questions";
 
 type QuestionProps = Omit<
   (typeof questions)[number],
-  "explanation" | "code"
+  "explanation" | "code" | "playgroundCode"
 > & {
   code: ReactNode;
 };

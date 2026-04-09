@@ -28,6 +28,30 @@ export const metadata: Metadata = {
   title: "TypeScript is weird",
   description:
     "A TypeScript quiz where you are going to learn some TypeScript concepts and encounter some weird and perhaps unexpected behaviors",
+  metadataBase: new URL("https://tsisweird.com"),
+  openGraph: {
+    title: "TypeScript is weird",
+    description:
+      "A TypeScript quiz where you are going to learn some TypeScript concepts and encounter some weird and perhaps unexpected behaviors",
+    url: "https://tsisweird.com",
+    siteName: "TypeScript is weird",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TypeScript is weird",
+    description:
+      "A TypeScript quiz where you are going to learn some TypeScript concepts and encounter some weird and perhaps unexpected behaviors",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({

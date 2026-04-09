@@ -19,7 +19,7 @@ export function Footer() {
         className="flex items-center gap-2"
       >
         <p className="text-center font-roboto-mono text-sm opacity-80">
-          [WIP] Made with 💙 by&nbsp;
+          Made with 💙 by&nbsp;
           <Link
             href="https://bento.me/alves"
             target="_blank"

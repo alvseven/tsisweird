@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ExternalLink } from "lucide-react";
 import { questions } from "../data/questions";
@@ -9,7 +10,7 @@ import Link from "next/link";
 export type ExplanationModalProps = {
   explanationModalIsOpen: boolean;
   onClose: () => void;
-  question: Pick<(typeof questions)[number], "title" | "explanation" | "code">;
+  question: Pick<(typeof questions)[number], "title" | "explanation" | "code" | "playgroundCode">;
 };
 
 export function ExplanationModal({
@@ -18,6 +19,22 @@ export function ExplanationModal({
   question,
 }: ExplanationModalProps) {
   const QuestionCode = question.code;
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    },
+    [onClose]
+  );
+
+  useEffect(() => {
+    if (explanationModalIsOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [explanationModalIsOpen, handleKeyDown]);
 
   return (
     <AnimatePresence>
@@ -79,19 +96,19 @@ export function ExplanationModal({
                   {question.explanation}
                 </p>
               </div>
-              <div className="flex justify-end pt-4">
-                <Link
-                  href={
-                    "https://www.typescriptlang.org/play/?#code/C4TwDgpgBAkgzgKQIYDckHED2mAmAeAFSggA9gIA7HOKAI2wBsIkKA+KAXiiNPKpoBmSBnAgAoKJKgB+KACIAIhAEBLCivIMQUCpmByJUgFzyAmpgCuUALYW4wOtADWKnDjUBzOQG4xY0JBQAEoQcBYMDlzwyGhYuHhCIhCsvkA"
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-indigo-400 font-medium text-sm hover:underline-offset-2 hover:underline"
-                >
-                  Open in TypeScript Playground
-                  <ExternalLink size={16} className="ml-1" />
-                </Link>
-              </div>
+              {question.playgroundCode && (
+                <div className="flex justify-end pt-4">
+                  <Link
+                    href={`https://www.typescriptlang.org/play/?#code/${compressToEncodedURIComponent(question.playgroundCode)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-indigo-400 font-medium text-sm hover:underline-offset-2 hover:underline"
+                  >
+                    Open in TypeScript Playground
+                    <ExternalLink size={16} className="ml-1" />
+                  </Link>
+                </div>
+              )}
             </div>
           </motion.div>
         </motion.div>

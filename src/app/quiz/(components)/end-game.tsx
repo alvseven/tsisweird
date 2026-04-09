@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 import Confetti from "react-confetti";
 import {
   CheckCircle,
   XCircle,
   HelpCircle,
-  Download,
   Share,
+  Check,
 } from "lucide-react";
 
 import {
@@ -26,6 +26,8 @@ export default function EndGame() {
   const [currentQuestion, setCurrentQuestion] = useState<
     ExplanationModalProps["question"] | null
   >(null);
+  const [copied, setCopied] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const { gameStatus } = useGame();
 
@@ -47,14 +49,19 @@ export default function EndGame() {
     setCurrentQuestion(null);
   };
 
-  const generatePDF = () => {
-    console.log("Generating PDF...");
-    alert("TODO :D");
-  };
+  const shareQuizResults = async () => {
+    const text = `I scored ${correctCount}/${gameStatus.total} on the TypeScript is weird quiz! Can you beat my score?\n\nhttps://tsisweird.com`;
 
-  const shareQuizResults = () => {
-    console.log("Sharing quiz results...");
-    alert("TODO :D");
+    if (navigator.share) {
+      try {
+        await navigator.share({ text });
+        return;
+      } catch {}
+    }
+
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const container = {
@@ -62,26 +69,27 @@ export default function EndGame() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: prefersReducedMotion ? 0 : 0.1,
       },
     },
   };
 
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
+  const item = prefersReducedMotion
+    ? { hidden: { opacity: 1 }, show: { opacity: 1 } }
+    : { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
   return (
     <>
-      <Confetti
-        width={window.innerWidth - 50}
-        height={window.innerHeight}
-        colors={["#10132B", "#2563eb", "#1e3a8a", "#1e40af", "#1d4ed8"]}
-        numberOfPieces={1000}
-        style={{ zIndex: 9999 }}
-        recycle={false}
-      />
+      {!prefersReducedMotion && (
+        <Confetti
+          width={window.innerWidth - 50}
+          height={window.innerHeight}
+          colors={["#10132B", "#2563eb", "#1e3a8a", "#1e40af", "#1d4ed8"]}
+          numberOfPieces={200}
+          style={{ zIndex: 9999 }}
+          recycle={false}
+        />
+      )}
       <motion.div
         initial="hidden"
         animate="show"
@@ -188,22 +196,13 @@ export default function EndGame() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+              whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
               className="flex gap-4 items-center justify-center text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full border border-double border-indigo-900 text-neutral-100 font-roboto-mono hover:border-gray-400 transition-all duration-300 w-full sm:w-auto"
               onClick={shareQuizResults}
             >
-              Share results
-              <Share />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={generatePDF}
-              className="flex gap-4 items-center justify-center text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full border border-double border-indigo-900 text-neutral-100 font-roboto-mono hover:border-gray-400 transition-all duration-300 w-full sm:w-auto"
-            >
-              Download PDF
-              <Download className="w-5 h-5 sm:w-6 sm:h-6" />
+              {copied ? "Copied!" : "Share results"}
+              {copied ? <Check /> : <Share />}
             </motion.button>
           </motion.div>
         </motion.div>
