@@ -39,7 +39,7 @@ export default function LearnPage() {
           <ArrowLeft className="w-4 h-4" />
           Back to home
         </Link>
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-inter tracking-wider mb-4">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-sans tracking-wider mb-4">
           TypeScript Behaviors Reference
         </h1>
         <p className="text-sm md:text-base text-slate-400 font-roboto-mono max-w-2xl">
@@ -67,7 +67,7 @@ export default function LearnPage() {
                 <span className="text-xs text-indigo-400 font-roboto-mono mb-2 block">
                   Question {index + 1}
                 </span>
-                <h2 className="font-inter text-base md:text-lg lg:text-xl font-bold text-slate-100">
+                <h2 className="font-sans text-base md:text-lg lg:text-xl font-bold text-slate-100">
                   {question.title}
                 </h2>
               </div>
@@ -90,7 +90,7 @@ export default function LearnPage() {
                 </h3>
                 <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded-lg px-4 py-2.5">
                   <CheckCircle className="w-4 h-4 text-green-400 shrink-0" />
-                  <span className="text-sm text-green-300 font-inter">
+                  <span className="text-sm text-green-300 font-sans">
                     {question.options[question.correctAnswer]}
                   </span>
                 </div>
@@ -100,7 +100,7 @@ export default function LearnPage() {
                 <h3 className="text-sm font-semibold text-slate-400 mb-3 font-roboto-mono">
                   Explanation
                 </h3>
-                <p className="text-sm text-slate-300 leading-relaxed font-inter">
+                <p className="text-sm text-slate-300 leading-relaxed font-sans">
                   {question.explanation}
                 </p>
                 {question.playgroundCode && (

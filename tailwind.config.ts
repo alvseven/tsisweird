@@ -9,8 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        "inter": "var(--font-primary)",
-        "roboto-mono": "var(--font-secondary)"
+        "fira-code": ["var(--font-primary)", "monospace"],
+        "sans": ["var(--font-sans)", "system-ui", "sans-serif"],
+        "roboto-mono": ["var(--font-secondary)", "monospace"],
       },
       keyframes: {
         blink: {

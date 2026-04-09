@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Fira_Code, Roboto_Mono } from "next/font/google";
+import { Fira_Code, Inter, Roboto_Mono } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -17,6 +17,10 @@ const firaCode = Fira_Code({
   weight: "600",
   subsets: ["greek"],
   variable: "--font-primary",
+});
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
 });
 const robotoMono = Roboto_Mono({
   weight: "600",
@@ -62,10 +66,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${firaCode.variable} ${robotoMono.variable} bg-[#10132B] text-neutral-50 `}
+        className={`${firaCode.variable} ${inter.variable} ${robotoMono.variable} bg-[#10132B] text-neutral-50 `}
       >
         <Header />
-        <main className="flex items-center justify-center w-full min-h-[72vh] sm:min-h-[77vh] xl:min-h-[83vh] bg-[#10132b]">
+        <main className="flex items-start justify-center w-full min-h-[72vh] sm:min-h-[77vh] xl:min-h-[83vh] bg-[#10132b]">
           <div>
             <Image
               src={Beam}
