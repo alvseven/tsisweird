@@ -18,7 +18,7 @@ export default function Home() {
   const QuestionCode = currentQuestion?.code;
 
   return (
-    <section className="flex flex-col xl:flex-row gap-8 pt-6 pb-12 px-1 lg:px-12 max-w-full z-50 drop-shadow-lg shadow-lg shadow-blue-950 min-w-[100%] min-h-[424px]">
+    <section className="flex flex-col xl:flex-row gap-8 pt-6 pb-12 px-1 lg:px-12 max-w-full z-50 drop-shadow-lg shadow-lg shadow-blue-950 min-w-[100%] h-[600px]">
       <Question
         title={currentQuestion.title}
         code={<QuestionCode />}

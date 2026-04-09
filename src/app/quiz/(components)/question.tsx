@@ -51,10 +51,10 @@ export function Question({
         transition={{ duration: 0.5 }}
         className="flex flex-col gap-4 px-2 min-w-[70%]"
       >
-        <h2 className="font-inter text-sm font-bold text-pretty text-slate-100 md:text-base lg:text-xl mx-2">
+        <h2 className="font-sans text-sm font-bold text-pretty text-slate-100 md:text-base lg:text-xl mx-2">
           {title}
         </h2>
-        <div className="[&>figure>pre]:min-h-[400px]">{code}</div>
+        <div className="[&>figure>pre]:min-h-[400px] [&>figure>pre]:max-h-[400px] [&>figure>pre]:overflow-y-auto">{code}</div>
       </motion.div>
       <motion.div
         initial={{ opacity: 0, x: 20 }}
@@ -70,7 +70,7 @@ export function Question({
             transition={{ duration: 0.3, delay: index * 0.1 }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className={` rounded-2xl text-slate-100 font-inter border-2 p-4 text-xs text-left flex items-center justify-between gap-4 transition-colors duration-200
+            className={` rounded-2xl text-slate-100 font-sans border-2 p-4 text-xs text-left flex items-center justify-between gap-4 transition-colors duration-200
              ${
                showFeedback && index === correctAnswer
                  ? "bg-green-500/20 border-green-500/30"
@@ -112,7 +112,7 @@ export function Question({
           transition={{ delay: 0.5 }}
           className="flex items-center justify-center mt-8 mb-2"
         >
-          <h4 className="text-sm font-inter">
+          <h4 className="text-sm font-sans">
             Question {currentQuestion} of {totalQuestions}
           </h4>
         </motion.div>
