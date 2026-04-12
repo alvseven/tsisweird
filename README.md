@@ -4,4 +4,3 @@ A TypeScript quiz that challenges you with unexpected behaviors, quirky type sys
 
 Test your knowledge across 20 questions covering conditional types, type predicates, distributive types, `infer`, `satisfies`, excess property checking, and more.
 
-Inspired by [jsisweird.com](https://jsisweird.com).

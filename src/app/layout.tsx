@@ -28,25 +28,52 @@ const robotoMono = Roboto_Mono({
   variable: "--font-secondary",
 });
 
+const siteUrl = "https://tsisweird.com";
+const siteName = "TypeScript is weird";
+const siteDescription =
+  "A TypeScript quiz with 20 questions on conditional types, type predicates, infer, satisfies, and other quirks that surprise even senior developers. Test your knowledge and learn the weird parts of TypeScript.";
+
 export const metadata: Metadata = {
-  title: "TypeScript is weird",
-  description:
-    "A TypeScript quiz where you are going to learn some TypeScript concepts and encounter some weird and perhaps unexpected behaviors",
-  metadataBase: new URL("https://tsisweird.com"),
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "TypeScript is weird — Quiz & Reference",
+    template: "%s | TypeScript is weird",
+  },
+  description: siteDescription,
+  keywords: [
+    "typescript quiz",
+    "typescript type system",
+    "typescript conditional types",
+    "typescript infer",
+    "typescript satisfies",
+    "typescript never type",
+    "typescript type challenges",
+    "typescript gotchas",
+    "typescript weird behaviors",
+    "typescript type predicates",
+    "learn typescript",
+    "typescript interview questions",
+    "typescript advanced types",
+  ],
+  authors: [{ name: "Alves", url: "https://bento.me/alves" }],
+  creator: "Alves",
+  publisher: "Alves",
+  alternates: {
+    canonical: siteUrl,
+  },
   openGraph: {
-    title: "TypeScript is weird",
-    description:
-      "A TypeScript quiz where you are going to learn some TypeScript concepts and encounter some weird and perhaps unexpected behaviors",
-    url: "https://tsisweird.com",
-    siteName: "TypeScript is weird",
+    title: "TypeScript is weird — Can you beat the quiz?",
+    description: siteDescription,
+    url: siteUrl,
+    siteName,
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "TypeScript is weird",
+    title: "TypeScript is weird — Can you beat the quiz?",
     description:
-      "A TypeScript quiz where you are going to learn some TypeScript concepts and encounter some weird and perhaps unexpected behaviors",
+      "20 TypeScript questions on type system quirks, conditional types, infer, satisfies and more. How well do you really know TypeScript?",
   },
   robots: {
     index: true,
@@ -54,9 +81,60 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
+  verification: {
+    // Add your Google Search Console verification code here:
+    // google: "your-verification-code",
+  },
+  category: "technology",
 };
+
+function JsonLd() {
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteName,
+    url: siteUrl,
+    description: siteDescription,
+    author: {
+      "@type": "Person",
+      name: "Alves",
+      url: "https://bento.me/alves",
+    },
+  };
+
+  const quizSchema = {
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    name: "TypeScript is weird Quiz",
+    description:
+      "Test your TypeScript knowledge with 20 questions on type system quirks, conditional types, type predicates, and more.",
+    url: `${siteUrl}/quiz`,
+    educationalLevel: "Advanced",
+    about: {
+      "@type": "Thing",
+      name: "TypeScript",
+    },
+    numberOfQuestions: 20,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(quizSchema) }}
+      />
+    </>
+  );
+}
 
 export default function RootLayout({
   children,
@@ -65,6 +143,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <JsonLd />
+      </head>
       <body
         className={`${firaCode.variable} ${inter.variable} ${robotoMono.variable} bg-[#10132B] text-neutral-50 `}
       >
