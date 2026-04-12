@@ -3,9 +3,18 @@ import type { Metadata } from "next";
 import { GameProvider } from "./contexts/game";
 
 export const metadata: Metadata = {
-  title: "TypeScript is weird",
+  title: "Quiz — Test Your TypeScript Knowledge",
   description:
-    "A TypeScript quiz where you are going to learn some TypeScript concepts and encounter some weird and perhaps unexpected behaviors",
+    "20 tricky TypeScript questions on conditional types, type predicates, infer, satisfies, never, and more. Can you get them all right?",
+  alternates: {
+    canonical: "https://tsisweird.com/quiz",
+  },
+  openGraph: {
+    title: "TypeScript is weird — Take the Quiz",
+    description:
+      "20 tricky TypeScript questions on conditional types, type predicates, infer, satisfies, never, and more.",
+    url: "https://tsisweird.com/quiz",
+  },
 };
 
 export default function RootLayout({

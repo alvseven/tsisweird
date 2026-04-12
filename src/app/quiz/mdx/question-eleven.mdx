@@ -1,0 +1,6 @@
+```typescript
+type MakeObject<T, Key extends string> = { [K in Key]: T };
+
+type Result = MakeObject<string | number, 'value'>;
+```
+

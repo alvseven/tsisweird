@@ -1,31 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
-
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import Confetti from "react-confetti";
-import {
-  CheckCircle,
-  XCircle,
-  HelpCircle,
-  Download,
-  Share,
-} from "lucide-react";
+import { BookOpen } from "lucide-react";
 
 import {
   ExplanationModal,
   type ExplanationModalProps,
 } from "./explanation-modal";
+import { ShareMenu } from "./share-menu";
+import { ScoreSummary } from "./score-summary";
 
 import { useGame } from "../contexts/game";
-
 import { questions } from "../data/questions";
+import { cn } from "@/lib/utils";
 
 export default function EndGame() {
   const [explanationModalIsOpen, setExplanationModalIsOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<
     ExplanationModalProps["question"] | null
   >(null);
+  const prefersReducedMotion = useReducedMotion();
 
   const { gameStatus } = useGame();
 
@@ -34,6 +31,9 @@ export default function EndGame() {
   );
   const correctCount = correctsAnswers.length;
   const incorrectCount = gameStatus.total - correctCount;
+
+  const shareText = `I scored ${correctCount}/${gameStatus.total} on the TypeScript is weird quiz! Can you beat my score?`;
+  const shareUrl = "https://tsisweird.com";
 
   const openExplanationModal = (
     question: ExplanationModalProps["question"]
@@ -47,98 +47,109 @@ export default function EndGame() {
     setCurrentQuestion(null);
   };
 
-  const generatePDF = () => {
-    console.log("Generating PDF...");
-    alert("TODO :D");
-  };
-
-  const shareQuizResults = () => {
-    console.log("Sharing quiz results...");
-    alert("TODO :D");
-  };
-
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: prefersReducedMotion ? 0 : 0.06,
       },
     },
   };
 
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
+  const item = prefersReducedMotion
+    ? { hidden: { opacity: 1 }, show: { opacity: 1 } }
+    : { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } };
 
   return (
     <>
-      <Confetti
-        width={window.innerWidth - 50}
-        height={window.innerHeight}
-        colors={["#10132B", "#2563eb", "#1e3a8a", "#1e40af", "#1d4ed8"]}
-        numberOfPieces={1000}
-        style={{ zIndex: 9999 }}
-        recycle={false}
-      />
+      {!prefersReducedMotion && (
+        <Confetti
+          width={window.innerWidth - 50}
+          height={window.innerHeight}
+          colors={["#3b82f6", "#8b5cf6", "#6366f1", "#2563eb", "#1d4ed8"]}
+          numberOfPieces={150}
+          style={{ zIndex: 9999 }}
+          recycle={false}
+        />
+      )}
       <motion.div
         initial="hidden"
         animate="show"
         variants={container}
-        className="flex flex-col items-center justify-center w-full min-h-screen text-neutral-50 px-4 py-8 z-50"
+        className="flex flex-col items-center w-full text-neutral-50 px-4 py-10 z-50"
       >
-        <motion.div variants={item} className="w-full lg:w-4/5">
-          <motion.h1
-            variants={item}
-            className="text-xl sm:text-2xl md:text-3xl font-inter tracking-wider mb-8"
-          >
-            Congratulations on completing the quiz! Here are your results:
-          </motion.h1>
+        <motion.div variants={item} className="w-full max-w-4xl">
+          <motion.div variants={item} className="text-center mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold tracking-tight mb-2">
+              Quiz complete
+            </h1>
+            <p className="text-sm text-slate-400 font-roboto-mono">
+              Here&apos;s how you did across all {gameStatus.total} questions.
+            </p>
+          </motion.div>
+
+          <motion.div variants={item}>
+            <ScoreSummary
+              correctCount={correctCount}
+              incorrectCount={incorrectCount}
+              total={gameStatus.total}
+            />
+          </motion.div>
+
           <motion.div
             variants={item}
-            className="bg-[#1a1f3d] rounded-lg p-4 sm:p-6 w-full mb-8"
+            className="flex items-center justify-center gap-3 mb-10"
           >
-            <div className="flex justify-between items-center mb-6 text-base sm:text-lg md:text-xl">
-              <motion.p
-                variants={item}
-                className="flex items-center gap-2 text-xs md:text-xl lg:text-2xl"
-              >
-                <XCircle className="text-red-400 w-5 h-5 lg:w-7 lg:h-7" />
-                <span className="font-roboto-mono text-red-400">
-                  Incorrect: {incorrectCount}
-                </span>
-              </motion.p>
-              <motion.p
-                variants={item}
-                className="flex items-center gap-2 text-xs md:text-xl lg:text-2xl"
-              >
-                <CheckCircle className="text-green-400 w-5 h-5 lg:w-7 lg:h-7" />
-                <span className="font-roboto-mono text-green-400">
-                  Correct: {correctCount}
-                </span>
-              </motion.p>
-            </div>
-            <motion.div variants={item} className="space-y-8">
-              {questions.map((question, index) => {
-                const userAnswer = gameStatus.answers[index];
-                const correctOption = question.correctAnswer;
-                const isCorrectAnswer = userAnswer === correctOption;
+            <ShareMenu shareText={shareText} shareUrl={shareUrl} />
+            <Link
+              href="/learn"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm bg-white/[0.05] border border-white/[0.08] text-slate-300 font-sans hover:bg-white/[0.08] hover:text-slate-100 transition-all duration-150"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              All explanations
+            </Link>
+          </motion.div>
 
-                return (
-                  <motion.div
-                    key={index}
-                    variants={item}
-                    whileHover={{ scale: 1.01 }}
-                    className="border border-indigo-900 rounded-lg p-4 transition-all duration-300 hover:border-indigo-600"
-                  >
-                    <h2 className="font-inter text-sm sm:text-base md:text-lg lg:text-xl font-bold text-slate-100 mb-4">
-                      {question.title}
-                    </h2>
-                    <div className="bg-[#10132B] p-4 rounded mb-4 overflow-x-auto">
-                      <question.code />
+          <motion.div variants={item} className="space-y-4">
+            <h2 className="text-xs font-roboto-mono text-slate-500 uppercase tracking-wider mb-4">
+              Review
+            </h2>
+            {questions.map((question, index) => {
+              const userAnswer = gameStatus.answers[index];
+              const isCorrectAnswer = userAnswer === question.correctAnswer;
+              const QuestionCode = question.code;
+
+              return (
+                <motion.div
+                  key={index}
+                  variants={item}
+                  className="rounded-xl bg-white/[0.02] border border-white/[0.06] overflow-hidden"
+                >
+                  <div className="p-4 sm:p-5">
+                    <div className="flex items-start gap-3 mb-4">
+                      <span
+                        className={cn(
+                          "flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-bold font-roboto-mono shrink-0 mt-0.5",
+                          isCorrectAnswer
+                            ? "bg-emerald-500/15 text-emerald-400"
+                            : "bg-red-500/15 text-red-400"
+                        )}
+                      >
+                        {index + 1}
+                      </span>
+                      <h3 className="font-sans text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
+                        {question.title}
+                      </h3>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
+
+                    <div className="rounded-lg overflow-hidden border border-white/[0.06] bg-white/[0.02] mb-4">
+                      <div className="[&>figure]:m-0 [&>figure>pre]:rounded-none [&>figure>pre]:border-0 overflow-x-auto">
+                        <QuestionCode />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
                       {question.options.map((option, optionIndex) => {
                         const isUserAnswer = optionIndex === userAnswer;
                         const isCorrectOption =
@@ -147,73 +158,46 @@ export default function EndGame() {
                         return (
                           <div
                             key={optionIndex}
-                            className={`relative rounded-lg text-slate-100 font-inter p-4 text-xs sm:text-sm transition-all duration-300 flex items-center
-                            ${
-                              isCorrectOption
-                                ? "bg-green-500/20 border-2 border-green-500/30"
-                                : isUserAnswer && !isCorrectAnswer
-                                ? "bg-red-500/20 border-2 border-red-500/30"
-                                : "border-2 border-blue-800/30"
-                            }`}
+                            className={cn(
+                              "flex items-center gap-2 rounded-lg px-3 py-2 text-xs sm:text-[13px] font-sans border",
+                              isCorrectOption &&
+                                "bg-emerald-500/10 border-emerald-500/20 text-emerald-300",
+                              !isCorrectOption &&
+                                isUserAnswer &&
+                                !isCorrectAnswer &&
+                                "bg-red-500/10 border-red-500/20 text-red-300",
+                              !isCorrectOption &&
+                                !(isUserAnswer && !isCorrectAnswer) &&
+                                "bg-transparent border-white/[0.04] text-slate-500"
+                            )}
                           >
-                            <div className="pr-6">{option}</div>
-                            <div className="absolute top-1/3 right-3">
-                              {isCorrectOption && (
-                                <CheckCircle className="w-5 h-5 text-green-400 my-auto" />
-                              )}
-                              {!isCorrectAnswer && isUserAnswer && (
-                                <XCircle className="w-5 h-5 text-red-400" />
-                              )}
-                            </div>
+                            <span className="leading-snug">{option}</span>
                           </div>
                         );
                       })}
                     </div>
-                    <div className="flex justify-center pt-4">
-                      <button
-                        onClick={() => openExplanationModal(question)}
-                        className="flex items-center gap-1 text-indigo-400 hover:text-indigo-300 transition-colors text-xs sm:text-sm font-roboto-mono"
-                      >
-                        <HelpCircle className="w-4 h-4" />
-                        See question explanation
-                      </button>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </motion.div>
-          <motion.div
-            variants={item}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex gap-4 items-center justify-center text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full border border-double border-indigo-900 text-neutral-100 font-roboto-mono hover:border-gray-400 transition-all duration-300 w-full sm:w-auto"
-              onClick={shareQuizResults}
-            >
-              Share results
-              <Share />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={generatePDF}
-              className="flex gap-4 items-center justify-center text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full border border-double border-indigo-900 text-neutral-100 font-roboto-mono hover:border-gray-400 transition-all duration-300 w-full sm:w-auto"
-            >
-              Download PDF
-              <Download className="w-5 h-5 sm:w-6 sm:h-6" />
-            </motion.button>
+
+                    <button
+                      onClick={() => openExplanationModal(question)}
+                      className="text-xs px-3 py-1.5 rounded-md bg-white/[0.04] border border-white/[0.06] text-slate-400 hover:text-slate-200 hover:bg-white/[0.06] transition-all duration-150 font-roboto-mono"
+                    >
+                      View explanation
+                    </button>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </motion.div>
-        {explanationModalIsOpen && currentQuestion && (
-          <ExplanationModal
-            question={currentQuestion}
-            explanationModalIsOpen={explanationModalIsOpen}
-            onClose={closeExplanationModal}
-          />
-        )}
+
+        <AnimatePresence>
+          {explanationModalIsOpen && currentQuestion && (
+            <ExplanationModal
+              question={currentQuestion}
+              onClose={closeExplanationModal}
+            />
+          )}
+        </AnimatePresence>
       </motion.div>
     </>
   );
