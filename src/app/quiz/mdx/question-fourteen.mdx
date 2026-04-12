@@ -1,0 +1,9 @@
+```typescript
+const colors = {
+  red: [255, 0, 0],
+  green: "#00ff00",
+} satisfies Record<string, string | number[]>;
+
+type RedType = typeof colors.red;
+```
+

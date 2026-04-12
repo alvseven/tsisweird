@@ -38,22 +38,6 @@ export function Footer() {
           </motion.div>
         </Link>
       </motion.div>
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.8 }}
-        transition={{ delay: 0.4, duration: 0.3 }}
-        className="text-center font-roboto-mono text-sm"
-      >
-        This site was inspired in&nbsp;
-        <Link
-          href="https://jsisweird.com"
-          target="_blank"
-          className="text-orange-600 brightness-150"
-        >
-          jsisweird
-        </Link>
-        &nbsp;{":)"}
-      </motion.p>
     </motion.footer>
   );
 }

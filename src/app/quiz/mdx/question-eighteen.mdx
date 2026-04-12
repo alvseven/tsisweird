@@ -1,0 +1,6 @@
+```typescript
+type ExtractArrayItem<T> = T extends (infer U)[] ? U : T;
+
+type Result = ExtractArrayItem<string[][]>;
+```
+

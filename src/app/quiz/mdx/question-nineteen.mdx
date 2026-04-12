@@ -1,0 +1,8 @@
+```typescript
+function fn(x: string): string;
+function fn(x: number): number;
+function fn(x: string | number) { return x; }
+
+type Result = ReturnType<typeof fn>;
+```
+
