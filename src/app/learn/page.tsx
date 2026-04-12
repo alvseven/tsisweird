@@ -14,6 +14,7 @@ import { compressToEncodedURIComponent } from "lz-string";
 
 import { questions } from "../quiz/data/questions";
 import { cn } from "@/lib/utils";
+import { LazyCodeBlock } from "./(components)/lazy-code-block";
 
 export default function LearnPage() {
   const prefersReducedMotion = useReducedMotion();
@@ -69,8 +70,6 @@ export default function LearnPage() {
         className="space-y-5"
       >
         {questions.map((question, index) => {
-          const QuestionCode = question.code;
-
           return (
             <motion.div
               key={index}
@@ -100,13 +99,7 @@ export default function LearnPage() {
                     </span>
                   </div>
                   <div className="[&>figure]:m-0 [&>figure>pre]:rounded-none [&>figure>pre]:border-0 overflow-x-auto">
-                    <QuestionCode
-                      components={{
-                        pre: (props: React.ComponentProps<"pre">) => (
-                          <pre {...props} className="custom-scrollbar" />
-                        ),
-                      }}
-                    />
+                    <LazyCodeBlock code={question.code} />
                   </div>
                 </div>
 
